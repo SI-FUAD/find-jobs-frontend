@@ -1,8 +1,9 @@
 function Home() {
   return (
-    <div>
-      <h1>Find Jobs</h1>
-      <p>Find your next opportunity here.</p>
+    <div className="min-h-screen bg-gray-100 flex items-center justify-center">
+      <h1 className="text-4xl font-bold text-blue-600">
+        Find Jobs
+      </h1>
     </div>
   );
 }
