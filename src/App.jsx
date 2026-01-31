@@ -8,6 +8,13 @@ import About from "./components/about/About";
 import Login from "./components/home/Login";
 import Register from "./components/home/Register";
 import Footer from "./components/home/Footer";
+import Dashboard from "./components/user/Dashboard";
+import Profile from "./components/user/Profile";
+import UserLayout from "./components/user/UserLayout";
+import AdminLayout from "./components/admin/AdminLayout";
+import Analytics from "./components/admin/Analytics";
+import ManageUsers from "./components/admin/ManageUsers";
+import CvCollection from "./components/admin/CvCollection";
 
 function App() {
   return (
@@ -21,6 +28,15 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route element={<UserLayout />}>
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/profile" element={<Profile />} />
+        </Route>
+        <Route path="/admin" element={<AdminLayout />}>
+        <Route index element={<Analytics />} />
+        <Route path="users" element={<ManageUsers />} />
+        <Route path="cv" element={<CvCollection />} />
+        </Route>
       </Routes>
 
       <Footer />
