@@ -9,40 +9,52 @@ function Login() {
     setForm({ ...form, [e.target.name]: e.target.value });
 
   const handleSubmit = e => {
-    e.preventDefault();
-    const data = JSON.parse(localStorage.getItem("Find Jobs Data"));
+  e.preventDefault();
+  const data = JSON.parse(localStorage.getItem("Find Jobs Data"));
 
-    /* =======================
-       ✅ ADMIN LOGIN CHECK
-    ======================== */
-    if (
-      form.email === "admin@findjobs.com" &&
-      form.password === "admin123"
-    ) {
-      navigate("/admin");
-      return;
-    }
-
-    /* =======================
-       ✅ NORMAL USER LOGIN
-    ======================== */
-    const user = data.users.find(
-      u => u.email === form.email && u.password === form.password
-    );
-
-    if (!user) {
-      alert("Invalid email or password");
-      return;
-    }
+  /* =======================
+     ✅ ADMIN LOGIN CHECK
+  ======================= */
+  if (
+    form.email === "admin@findjobs.com" &&
+    form.password === "admin123"
+  ) {
+    const adminUser = {
+      email: "admin@findjobs.com",
+      role: "admin"
+    };
 
     data.others = data.others.map(o =>
-      o.type === "currentUser" ? { ...o, data: user } : o
+      o.type === "currentUser" ? { ...o, data: adminUser } : o
     );
 
     localStorage.setItem("Find Jobs Data", JSON.stringify(data));
     window.dispatchEvent(new Event("authChanged"));
-    navigate("/");
-  };
+
+    navigate("/admin/analytics");
+    return;
+  }
+
+  /* =======================
+     ✅ NORMAL USER LOGIN
+  ======================= */
+  const user = data.users.find(
+    u => u.email === form.email && u.password === form.password
+  );
+
+  if (!user) {
+    alert("Invalid email or password");
+    return;
+  }
+
+  data.others = data.others.map(o =>
+    o.type === "currentUser" ? { ...o, data: user } : o
+  );
+
+  localStorage.setItem("Find Jobs Data", JSON.stringify(data));
+  window.dispatchEvent(new Event("authChanged"));
+  navigate("/");
+};
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">

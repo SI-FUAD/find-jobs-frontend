@@ -19,8 +19,8 @@ if (!localStorage.getItem("Find Jobs Data")) {
         },
         {
           type: "currentUser",
-          data: null,
-        },
+          data: null
+        }
       ],
     })
   );

@@ -15,6 +15,12 @@ import AdminLayout from "./components/admin/AdminLayout";
 import Analytics from "./components/admin/Analytics";
 import ManageUsers from "./components/admin/ManageUsers";
 import CvCollection from "./components/admin/CvCollection";
+import CompanyLogin from "./components/companies/CompanyLogin";
+import CompanyRegister from "./components/companies/CompanyRegister";
+import CompanyLayout from "./components/companies/CompanyLayout";
+import CompanyDashboard from "./components/companies/CompanyDashboard";
+import AddJobPost from "./components/companies/AddJobPost";
+import ManageJobPosts from "./components/companies/ManageJobPosts";
 
 function App() {
   return (
@@ -30,13 +36,17 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route element={<UserLayout />}>
         <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/profile" element={<Profile />} />
-        </Route>
+        <Route path="/profile" element={<Profile />} /></Route>
         <Route path="/admin" element={<AdminLayout />}>
-        <Route index element={<Analytics />} />
-        <Route path="users" element={<ManageUsers />} />
-        <Route path="cv" element={<CvCollection />} />
-        </Route>
+        <Route path="analytics" element={<Analytics />} />
+        <Route path="manage-users" element={<ManageUsers />} />
+        <Route path="cv-collections" element={<CvCollection />} /></Route>
+        <Route path="/company/login" element={<CompanyLogin />} />
+      <Route path="/company/register" element={<CompanyRegister />} />
+      <Route path="/company" element={<CompanyLayout />}>
+      <Route index element={<CompanyDashboard />} />
+      <Route path="add-job" element={<AddJobPost />} />
+      <Route path="manage-jobs" element={<ManageJobPosts />} /></Route>
       </Routes>
 
       <Footer />

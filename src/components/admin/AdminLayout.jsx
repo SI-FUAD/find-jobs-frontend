@@ -5,11 +5,9 @@ function AdminLayout() {
 
   const logout = () => {
     const data = JSON.parse(localStorage.getItem("Find Jobs Data"));
-
     data.others = data.others.map(o =>
       o.type === "currentUser" ? { ...o, data: null } : o
     );
-
     localStorage.setItem("Find Jobs Data", JSON.stringify(data));
     window.dispatchEvent(new Event("authChanged"));
     navigate("/");
@@ -26,15 +24,15 @@ function AdminLayout() {
     <div className="flex min-h-screen pt-20">
       {/* Sidebar */}
       <aside className="w-64 bg-black p-6 space-y-2">
-        <NavLink to="/admin" end className={linkClass}>
+        <NavLink to="/admin/analytics" className={linkClass}>
           Analytics
         </NavLink>
 
-        <NavLink to="/admin/users" className={linkClass}>
+        <NavLink to="/admin/manage-users" className={linkClass}>
           Manage Users
         </NavLink>
 
-        <NavLink to="/admin/cv" className={linkClass}>
+        <NavLink to="/admin/cv-collections" className={linkClass}>
           CV Collection
         </NavLink>
 
