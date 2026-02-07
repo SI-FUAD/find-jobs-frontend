@@ -1,7 +1,9 @@
 import { Outlet, NavLink, useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 function CompanyLayout() {
   const navigate = useNavigate();
+  const [open, setOpen] = useState(false);
 
   const handleLogout = () => {
     const data = JSON.parse(localStorage.getItem("Find Jobs Data"));
@@ -14,50 +16,68 @@ function CompanyLayout() {
   };
 
   const navLinkClass = ({ isActive }) =>
-    isActive ? "text-orange-600 font-bold" : "text-gray-700";
+    `block px-4 py-2 rounded-lg transition ${
+      isActive
+        ? "bg-orange-500 text-white font-semibold"
+        : "text-gray-600 hover:bg-orange-100"
+    }`;
 
   return (
-    <div className="min-h-screen flex flex-col bg-orange-50">
-      {/* Header */}
-      <header className="bg-orange-500 text-white p-4 flex justify-between items-center">
-        <h1 className="font-bold text-xl">Company Dashboard</h1>
-      </header>
+    <div className="min-h-screen bg-orange-50 pt-20 flex">
 
-      <div className="flex flex-1">
-        {/* Sidebar */}
-        <nav className="w-60 bg-white p-4 border-r border-orange-200">
-          <ul className="flex flex-col gap-3">
-            <li>
-              <NavLink to="/company" end className={navLinkClass}>
-                Dashboard
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="/company/add-job" className={navLinkClass}>
-                Add New Job
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="/company/manage-jobs" className={navLinkClass}>
-                Manage Jobs
-              </NavLink>
-            </li>
-            <li>
-              <button
-                onClick={handleLogout}
-                className="text-red-500 border border-red-400 px-3 py-1 rounded"
-              >
-                Logout
-              </button>
-            </li>
-          </ul>
-        </nav>
-
-        {/* Main content */}
-        <main className="flex-1 p-6 bg-orange-50">
-          <Outlet />
-        </main>
+      {/* Mobile Header */}
+      <div className="fixed top-20 left-0 right-0 bg-white border-b z-40 md:hidden flex justify-between items-center px-4 py-3">
+        <h1 className="font-bold text-orange-600 text-lg">Company Panel</h1>
+        <button
+          onClick={() => setOpen(!open)}
+          className="text-orange-600 font-bold text-xl"
+        >
+          ☰
+        </button>
       </div>
+
+      {/* Sidebar */}
+      <aside
+        className={`fixed md:static top-20 left-0 z-50 w-64 bg-white border-r border-orange-200 min-h-[calc(100vh-5rem)]
+        transform transition-transform duration-300
+        ${open ? "translate-x-0" : "-translate-x-full"} md:translate-x-0`}
+      >
+        <div className="p-6 border-b">
+          <h1 className="text-xl font-bold text-orange-600">
+            Company Panel
+          </h1>
+          <p className="text-sm text-gray-400">
+            Manage your hiring
+          </p>
+        </div>
+
+        <nav className="p-4 space-y-2">
+          <NavLink to="/company" end className={navLinkClass} onClick={() => setOpen(false)}>
+            Dashboard
+          </NavLink>
+
+          <NavLink to="/company/add-job" className={navLinkClass} onClick={() => setOpen(false)}>
+            Add Job Post
+          </NavLink>
+
+          <NavLink to="/company/manage-jobs" className={navLinkClass} onClick={() => setOpen(false)}>
+            Manage Jobs
+          </NavLink>
+
+          <br />
+          <button
+            onClick={handleLogout}
+            className="mt-4 w-20 py-2 rounded-lg border border-red-300 text-red-600 hover:bg-red-50"
+          >
+            Logout
+          </button>
+        </nav>
+      </aside>
+
+      {/* Main Content */}
+      <main className="flex-1 p-4 md:p-6 md:ml-0 mt-12 md:mt-0">
+        <Outlet />
+      </main>
     </div>
   );
 }

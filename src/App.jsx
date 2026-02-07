@@ -21,6 +21,8 @@ import CompanyLayout from "./components/companies/CompanyLayout";
 import CompanyDashboard from "./components/companies/CompanyDashboard";
 import AddJobPost from "./components/companies/AddJobPost";
 import ManageJobPosts from "./components/companies/ManageJobPosts";
+import EditJobPost from "./components/companies/EditJobPost";
+import ViewJobPost from "./components/companies/ViewJobPost";
 
 function App() {
   return (
@@ -47,6 +49,9 @@ function App() {
       <Route index element={<CompanyDashboard />} />
       <Route path="add-job" element={<AddJobPost />} />
       <Route path="manage-jobs" element={<ManageJobPosts />} /></Route>
+      <Route path="/company/manage-jobs" element={<ManageJobPosts />} />
+      <Route path="/company/view-job/:id" element={<ViewJobPost />} />
+      <Route path="/company/edit-job/:id" element={<EditJobPost />} />
       </Routes>
 
       <Footer />
