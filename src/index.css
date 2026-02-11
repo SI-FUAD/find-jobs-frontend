@@ -1,3 +1,66 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@media print {
+
+  /* A4 Page Setup */
+  @page {
+    size: A4;
+    margin: 15mm;
+  }
+
+  html, body {
+    height: auto !important;
+    overflow: visible !important;
+    background: white !important;
+  }
+
+  body {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Hide navigation + sidebar + buttons for print */
+  #main-navbar,
+  #user-mobile-header,
+  aside,
+  .no-print {
+    display: none !important;
+  }
+
+  /* Remove outer gray background spacing */
+  .bg-gray-100 {
+    padding: 0 !important;
+    margin: 0 !important;
+    background: white !important;
+  }
+
+  /* CV container */
+  #cv-content {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    overflow: visible !important;
+    background: white !important;
+  }
+
+  /* Prevent awkward page breaks */
+  section {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  h1, h2, h3 {
+    page-break-after: avoid;
+  }
+
+  /* Main content print adjustments */
+  main {
+    overflow: visible !important;
+    height: auto !important;
+  }
+}

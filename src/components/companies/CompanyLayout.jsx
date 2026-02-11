@@ -23,7 +23,7 @@ function CompanyLayout() {
     }`;
 
   return (
-    <div className="min-h-screen bg-orange-50 pt-20 flex">
+    <div className="bg-orange-50 pt-20 flex h-[calc(100vh-5rem)] overflow-hidden">
 
       {/* Mobile Header */}
       <div className="fixed top-20 left-0 right-0 bg-white border-b z-40 md:hidden flex justify-between items-center px-4 py-3">
@@ -38,7 +38,7 @@ function CompanyLayout() {
 
       {/* Sidebar */}
       <aside
-        className={`fixed md:static top-20 left-0 z-50 w-64 bg-white border-r border-orange-200 min-h-[calc(100vh-5rem)]
+      className={`fixed md:static top-20 left-0 z-50 w-64 bg-white border-r border-orange-200 h-[calc(100vh-5rem)]
         transform transition-transform duration-300
         ${open ? "translate-x-0" : "-translate-x-full"} md:translate-x-0`}
       >
@@ -75,7 +75,7 @@ function CompanyLayout() {
       </aside>
 
       {/* Main Content */}
-      <main className="flex-1 p-4 md:p-6 md:ml-0 mt-12 md:mt-0">
+      <main className="flex-1 p-4 md:p-6 mt-12 md:mt-0 overflow-y-auto">
         <Outlet />
       </main>
     </div>

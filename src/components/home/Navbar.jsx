@@ -46,8 +46,8 @@ function Navbar() {
   };
 
   return (
-    <nav className="fixed top-0 left-0 w-full z-50 bg-black/90">
-      <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+    <nav id="main-navbar" className="fixed top-0 left-0 w-full z-50 bg-black print:hidden">
+      <div className="max-w-7xl mx-auto px-4 py-5 flex justify-between items-center">
 
         {/* Logo */}
         <div className="flex items-center gap-2 select-none">
@@ -202,30 +202,58 @@ function Navbar() {
               )}
 
               {/* User Dropdown */}
-              {currentUser && !isAdmin && !currentUser?.companyId && (
-                <>
-                  <button
-                    onClick={() => { setAvatarOpen(false); navigate("/dashboard"); }}
-                    className="w-full px-4 py-2 text-left text-gray-300 hover:bg-white/10"
-                  >
-                    Dashboard
-                  </button>
+{currentUser && !isAdmin && !currentUser?.companyId && (
+  <>
+    <button
+      onClick={() => { setAvatarOpen(false); navigate("/dashboard"); }}
+      className="w-full px-4 py-2 text-left text-gray-300 hover:bg-white/10"
+    >
+      Dashboard
+    </button>
 
-                  <button
-                    onClick={() => { setAvatarOpen(false); navigate("/profile"); }}
-                    className="w-full px-4 py-2 text-left text-gray-300 hover:bg-white/10"
-                  >
-                    Profile
-                  </button>
+    <button
+      onClick={() => { setAvatarOpen(false); navigate("/profile"); }}
+      className="w-full px-4 py-2 text-left text-gray-300 hover:bg-white/10"
+    >
+      Profile
+    </button>
 
-                  <button
-                    onClick={handleLogout}
-                    className="w-full px-4 py-2 text-left text-red-400 hover:bg-white/10"
-                  >
-                    Logout
-                  </button>
-                </>
-              )}
+    <button
+      onClick={() => { setAvatarOpen(false); navigate("/my-cv"); }}
+      className="w-full px-4 py-2 text-left text-gray-300 hover:bg-white/10"
+    >
+      My CV
+    </button>
+
+    <button
+      onClick={() => { setAvatarOpen(false); navigate("/saved-jobs"); }}
+      className="w-full px-4 py-2 text-left text-gray-300 hover:bg-white/10"
+    >
+      Saved Jobs
+    </button>
+
+    <button
+      onClick={() => { setAvatarOpen(false); navigate("/applied-jobs"); }}
+      className="w-full px-4 py-2 text-left text-gray-300 hover:bg-white/10"
+    >
+      Applied Jobs
+    </button>
+
+    <button
+      onClick={() => { setAvatarOpen(false); navigate("/shortlisted-jobs"); }}
+      className="w-full px-4 py-2 text-left text-gray-300 hover:bg-white/10"
+    >
+      Shortlisted Jobs
+    </button>
+
+    <button
+      onClick={handleLogout}
+      className="w-full px-4 py-2 text-left text-red-400 hover:bg-white/10"
+    >
+      Logout
+    </button>
+  </>
+)}
             </div>
           )}
         </div>
@@ -318,7 +346,7 @@ function Navbar() {
                 <button onClick={() => { setMobileMenu(false); navigate("/company"); }} className="w-full py-2 rounded-lg text-white bg-orange-500">Dashboard</button>
                 <button onClick={() => { setMobileMenu(false); navigate("/company/add-job"); }} className="w-full py-2 rounded-lg text-white bg-orange-500">Add Job</button>
                 <button onClick={() => { setMobileMenu(false); navigate("/company/manage-jobs"); }} className="w-full py-2 rounded-lg text-white bg-orange-500">Manage Jobs</button>
-                <button onClick={() => { setMobileMenu(false); handleLogout(); }} className="w-full py-2 rounded-lg text-red-400 bg-black/20">Logout</button>
+                <button onClick={() => { setMobileMenu(false); handleLogout(); }} className="px-6 py-2 rounded-lg border border-red-400 text-red-400 hover:bg-red-500/10 transition">Logout</button>
               </>
             )}
 
@@ -328,18 +356,63 @@ function Navbar() {
                 <button onClick={() => { setMobileMenu(false); navigate("/admin/analytics"); }} className="w-full py-2 rounded-lg text-white bg-green-600">Analytics</button>
                 <button onClick={() => { setMobileMenu(false); navigate("/admin/manage-users"); }} className="w-full py-2 rounded-lg text-white bg-green-600">Manage Users</button>
                 <button onClick={() => { setMobileMenu(false); navigate("/admin/cv-collections"); }} className="w-full py-2 rounded-lg text-white bg-green-600">CV Collections</button>
-                <button onClick={() => { setMobileMenu(false); handleLogout(); }} className="w-full py-2 rounded-lg text-red-400 bg-black/20">Logout</button>
+                <button onClick={() => { setMobileMenu(false); handleLogout(); }} className="px-6 py-2 rounded-lg border border-red-400 text-red-400 hover:bg-red-500/10 transition">Logout</button>
               </>
             )}
 
             {/* User Mobile Dropdown */}
-            {currentUser && !isAdmin && !currentUser?.companyId && (
-              <>
-                <button onClick={() => { setMobileMenu(false); navigate("/dashboard"); }} className="w-full py-2 rounded-lg text-white border border-white/30">Dashboard</button>
-                <button onClick={() => { setMobileMenu(false); navigate("/profile"); }} className="w-full py-2 rounded-lg text-white border border-white/30">Profile</button>
-                <button onClick={() => { setMobileMenu(false); handleLogout(); }} className="w-full py-2 rounded-lg text-red-400 border border-white/30">Logout</button>
-              </>
-            )}
+{currentUser && !isAdmin && !currentUser?.companyId && (
+  <>
+    <button
+      onClick={() => { setMobileMenu(false); navigate("/dashboard"); }}
+      className="w-full py-2 rounded-lg text-white bg-blue-600 hover:bg-blue-700"
+    >
+      Dashboard
+    </button>
+
+    <button
+      onClick={() => { setMobileMenu(false); navigate("/profile"); }}
+      className="w-full py-2 rounded-lg text-white bg-blue-600 hover:bg-blue-700"
+    >
+      Profile
+    </button>
+
+    <button
+      onClick={() => { setMobileMenu(false); navigate("/my-cv"); }}
+      className="w-full py-2 rounded-lg text-white bg-blue-600 hover:bg-blue-700"
+    >
+      My CV
+    </button>
+
+    <button
+      onClick={() => { setMobileMenu(false); navigate("/saved-jobs"); }}
+      className="w-full py-2 rounded-lg text-white bg-blue-600 hover:bg-blue-700"
+    >
+      Saved Jobs
+    </button>
+
+    <button
+      onClick={() => { setMobileMenu(false); navigate("/applied-jobs"); }}
+      className="w-full py-2 rounded-lg text-white bg-blue-600 hover:bg-blue-700"
+    >
+      Applied Jobs
+    </button>
+
+    <button
+      onClick={() => { setMobileMenu(false); navigate("/shortlisted-jobs"); }}
+      className="w-full py-2 rounded-lg text-white bg-blue-600 hover:bg-blue-700"
+    >
+      Shortlisted Jobs
+    </button>
+
+    <button
+      onClick={() => { setMobileMenu(false); handleLogout(); }}
+      className="px-6 py-2 rounded-lg border border-red-400 text-red-400 hover:bg-red-500/10 transition"
+    >
+      Logout
+    </button>
+  </>
+)}
 
           </div>
         </div>
