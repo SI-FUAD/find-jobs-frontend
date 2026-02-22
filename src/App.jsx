@@ -1,5 +1,6 @@
 import Navbar from "./components/home/Navbar";
 import { Routes, Route } from "react-router-dom";
+import ScrollToTop from "./components/home/ScrollToTop";
 
 import Home from "./components/home/Home";
 import Jobs from "./components/jobs/Jobs";
@@ -14,6 +15,10 @@ import UserLayout from "./components/user/UserLayout";
 import AdminLayout from "./components/admin/AdminLayout";
 import Analytics from "./components/admin/Analytics";
 import ManageUsers from "./components/admin/ManageUsers";
+import AdminViewUserCV from "./components/admin/AdminViewUserCV";
+import ManageCompanies from "./components/admin/ManageCompanies";
+import AdminCompanyDetails from "./components/admin/AdminCompanyDetails";
+import ManageApplications from "./components/admin/ManageApplications";
 import CvCollection from "./components/admin/CvCollection";
 import CompanyLogin from "./components/companies/CompanyLogin";
 import CompanyRegister from "./components/companies/CompanyRegister";
@@ -27,14 +32,17 @@ import MyCV from "./components/user/MyCV";
 import SavedJobs from "./components/user/SavedJobs";
 import AppliedJobs from "./components/user/AppliedJobs";
 import ShortlistedJobs from "./components/user/ShortlistedJobs";
+import JobView from "./components/jobs/JobView";
 
 function App() {
   return (
     <div className="bg-black">
+      <ScrollToTop /> {/* ✅ Global scroll reset */}
+
       <Navbar />
 
       <Routes>
-        {/* ===== Public Pages (with footer) ===== */}
+        {/* ===== Public Pages ===== */}
         <Route
           path="/"
           element={
@@ -44,6 +52,7 @@ function App() {
             </>
           }
         />
+
         <Route
           path="/jobs"
           element={
@@ -53,6 +62,7 @@ function App() {
             </>
           }
         />
+
         <Route
           path="/companies"
           element={
@@ -62,6 +72,7 @@ function App() {
             </>
           }
         />
+
         <Route
           path="/about"
           element={
@@ -71,6 +82,7 @@ function App() {
             </>
           }
         />
+
         <Route
           path="/login"
           element={
@@ -80,6 +92,7 @@ function App() {
             </>
           }
         />
+
         <Route
           path="/register"
           element={
@@ -89,29 +102,49 @@ function App() {
             </>
           }
         />
-        
-        /* ===== User Pages ===== */
+
+        <Route
+  path="/company/login"
+  element={
+    <>
+      <CompanyLogin />
+      <Footer />
+    </>
+  }
+/>
+
+<Route
+  path="/company/register"
+  element={
+    <>
+      <CompanyRegister />
+      <Footer />
+    </>
+  }
+/>
+
+        {/* ===== User Pages ===== */}
         <Route element={<UserLayout />}>
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/my-cv" element={<MyCV />} />
-        <Route path="/saved-jobs" element={<SavedJobs />} />
-        <Route path="/applied-jobs" element={<AppliedJobs />} />
-        <Route path="/shortlisted-jobs" element={<ShortlistedJobs />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/my-cv" element={<MyCV />} />
+          <Route path="/saved-jobs" element={<SavedJobs />} />
+          <Route path="/applied-jobs" element={<AppliedJobs />} />
+          <Route path="/shortlisted-jobs" element={<ShortlistedJobs />} />
         </Route>
 
         {/* ===== Admin Pages ===== */}
-        <Route path="/admin" element={<AdminLayout />}>
-          <Route path="analytics" element={<Analytics />} />
-          <Route path="manage-users" element={<ManageUsers />} />
-          <Route path="cv-collections" element={<CvCollection />} />
-        </Route>
+<Route path="/admin" element={<AdminLayout />}>
+  <Route path="analytics" element={<Analytics />} />
+  <Route path="manage-users" element={<ManageUsers />} />
+  <Route path="manage-companies" element={<ManageCompanies />} />
+  <Route path="manage-applications" element={<ManageApplications />} />
+  <Route path="cv-collections" element={<CvCollection />} />
+  <Route path="view-cv/:userId" element={<AdminViewUserCV />} />
+  <Route path="company-details/:companyId" element={<AdminCompanyDetails />} />
+</Route>
 
-        {/* ===== Company Auth ===== */}
-        <Route path="/company/login" element={<CompanyLogin />} />
-        <Route path="/company/register" element={<CompanyRegister />} />
-
-        {/* ===== Company Panel (scroll handled inside layout) ===== */}
+        {/* ===== Company Panel ===== */}
         <Route path="/company" element={<CompanyLayout />}>
           <Route index element={<CompanyDashboard />} />
           <Route path="add-job" element={<AddJobPost />} />
@@ -119,6 +152,8 @@ function App() {
           <Route path="view-job/:id" element={<ViewJobPost />} />
           <Route path="edit-job/:id" element={<EditJobPost />} />
         </Route>
+
+        <Route path="/jobs/:id" element={<JobView />} />
       </Routes>
     </div>
   );

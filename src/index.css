@@ -24,6 +24,7 @@
   /* Hide navigation + sidebar + buttons for print */
   #main-navbar,
   #user-mobile-header,
+  #admin-mobile-header,
   aside,
   .no-print {
     display: none !important;

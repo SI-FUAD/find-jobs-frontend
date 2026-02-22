@@ -1,5 +1,3 @@
-import { BiLocationPlus } from "react-icons/bi";
-
 function CVTemplate({ user }) {
   const initials =
     user.userLogoText ||
@@ -79,7 +77,7 @@ function CVTemplate({ user }) {
               marginTop: "5px",
             }}
           >
-            {user.title || "Professional"}
+            {user.careerTitle || "Professional"}
           </p>
 
           <div
@@ -90,51 +88,106 @@ function CVTemplate({ user }) {
               lineHeight: "1.6",
             }}
           >
-            <div>📧 {user.email}</div>
-            <div>📞 {user.phone}</div>
-            {user.currentAddress && (
-              <div>📍 {user.currentAddress}</div>
-            )}
+            <div
+  style={{
+    marginTop: "10px",
+    fontSize: "14px",
+    color: "#4b5563",
+    lineHeight: "1.6",
+  }}
+>
+  {user.email && <div>📧 {user.email}</div>}
+  {user.phone && <div>📞 {user.phone}</div>}
+  {user.currentAddress && <div>📍 {user.currentAddress}</div>}
+</div>
           </div>
         </div>
       </div>
 
-      {/* ================= PERSONAL INFO ================= */}
-      <section style={{ marginBottom: "25px" }}>
-        <h2
-          style={{
-            fontSize: "18px",
-            fontWeight: "bold",
-            color: "#2563eb",
-            borderLeft: "5px solid #2563eb",
-            paddingLeft: "10px",
-            marginBottom: "12px",
-          }}
-        >
-          Personal Information
-        </h2>
+      {/* ================= PROFESSIONAL SUMMARY ================= */}
+{user.careerSummary && (
+  <section style={{ marginBottom: "25px" }}>
+    <h2
+  style={{
+    fontSize: "20px",
+    fontWeight: "bold",
+    color: "#2563eb",
+    borderLeft: "6px solid #2563eb",
+    paddingLeft: "12px",
+    marginBottom: "15px",
+  }}
+>
+      Professional Summary
+    </h2>
 
-        <div style={{ fontSize: "14px", lineHeight: "1.8" }}>
-          <div><strong>Gender:</strong> {user.gender}</div>
-          <div><strong>Marital Status:</strong> {user.maritalStatus}</div>
-          <div><strong>Father’s Name:</strong> {user.fatherName}</div>
-          <div><strong>Mother’s Name:</strong> {user.motherName}</div>
-        </div>
-      </section>
+    <p
+      style={{
+        fontSize: "14px",
+        lineHeight: "1.8",
+        color: "#374151",
+        textAlign: "justify",
+      }}
+    >
+      {user.careerSummary}
+    </p>
+  </section>
+)}
+
+      {/* ================= PERSONAL INFO ================= */}
+      {(
+  user.fatherName ||
+  user.motherName ||
+  user.gender ||
+  user.maritalStatus ||
+  user.emergencyPhone
+) && (
+  <section style={{ marginBottom: "25px" }}>
+    <h2
+      style={{
+        fontSize: "20px",
+        fontWeight: "bold",
+        color: "#2563eb",
+        borderLeft: "6px solid #2563eb",
+        paddingLeft: "12px",
+        marginBottom: "15px",
+      }}
+    >
+      Personal Information
+    </h2>
+
+    <div style={{ fontSize: "14px", lineHeight: "1.8" }}>
+      {user.fatherName && (
+        <div><strong>Father’s Name:</strong> {user.fatherName}</div>
+      )}
+      {user.motherName && (
+        <div><strong>Mother’s Name:</strong> {user.motherName}</div>
+      )}
+      {user.gender && (
+        <div><strong>Gender:</strong> {user.gender}</div>
+      )}
+      {user.maritalStatus && (
+        <div><strong>Marital Status:</strong> {user.maritalStatus}</div>
+      )}
+      {user.emergencyPhone && (
+        <div><strong>Emergency Phone:</strong> {user.emergencyPhone}</div>
+      )}
+    </div>
+  </section>
+)}
 
       {/* ================= EDUCATION ================= */}
       {user.education?.length > 0 && (
         <section style={{ marginBottom: "25px" }}>
           <h2
-            style={{
-              fontSize: "18px",
-              fontWeight: "bold",
-              color: "#2563eb",
-              borderLeft: "5px solid #2563eb",
-              paddingLeft: "10px",
-              marginBottom: "12px",
-            }}
-          >
+  style={{
+    fontSize: "20px",
+    fontWeight: "bold",
+    color: "#2563eb",
+    borderLeft: "6px solid #2563eb",
+    paddingLeft: "12px",
+    marginBottom: "15px",
+  }}
+>
             Education
           </h2>
 
@@ -163,15 +216,15 @@ function CVTemplate({ user }) {
       {user.experience?.length > 0 && (
         <section style={{ marginBottom: "25px" }}>
           <h2
-            style={{
-              fontSize: "18px",
-              fontWeight: "bold",
-              color: "#2563eb",
-              borderLeft: "5px solid #2563eb",
-              paddingLeft: "10px",
-              marginBottom: "12px",
-            }}
-          >
+  style={{
+    fontSize: "20px",
+    fontWeight: "bold",
+    color: "#2563eb",
+    borderLeft: "6px solid #2563eb",
+    paddingLeft: "12px",
+    marginBottom: "15px",
+  }}
+>
             Work Experience
           </h2>
 
@@ -198,21 +251,37 @@ function CVTemplate({ user }) {
 
       {/* ===== CERTIFICATIONS ===== */}
 {user.certificates?.length > 0 && (
-  <section className="mb-6">
-    <h2 className="text-blue-600 font-semibold mb-4 relative pl-3">
-      <span className="absolute left-0 top-1 w-1 h-full bg-blue-600 rounded"></span>
+  <section style={{ marginBottom: "25px" }}>
+    <h2
+      style={{
+        fontSize: "20px",
+        fontWeight: "bold",
+        color: "#2563eb",
+        borderLeft: "6px solid #2563eb",
+        paddingLeft: "12px",
+        marginBottom: "15px",
+      }}
+    >
       Certifications
     </h2>
 
-    <div className="space-y-4">
-      {user.certificates.map((cert, index) => (
-        <div key={index} className="pl-4">
-          <p className="text-gray-900 font-semibold text-base">
-            {cert.name} — {cert.organization} ({cert.year})
-          </p>
+    {user.certificates.map((cert, index) => (
+      <div
+        key={index}
+        style={{
+          marginBottom: "12px",
+          paddingBottom: "8px",
+          borderBottom: "1px solid #e5e7eb",
+        }}
+      >
+        <div style={{ fontWeight: "600" }}>
+          {cert.name}
         </div>
-      ))}
-    </div>
+        <div style={{ fontSize: "14px", color: "#6b7280" }}>
+          {cert.organization} • {cert.year}
+        </div>
+      </div>
+    ))}
   </section>
 )}
 
@@ -220,15 +289,15 @@ function CVTemplate({ user }) {
       {user.links?.length > 0 && (
         <section>
           <h2
-            style={{
-              fontSize: "18px",
-              fontWeight: "bold",
-              color: "#2563eb",
-              borderLeft: "5px solid #2563eb",
-              paddingLeft: "10px",
-              marginBottom: "12px",
-            }}
-          >
+  style={{
+    fontSize: "20px",
+    fontWeight: "bold",
+    color: "#2563eb",
+    borderLeft: "6px solid #2563eb",
+    paddingLeft: "12px",
+    marginBottom: "15px",
+  }}
+>
             Links
           </h2>
 

@@ -169,37 +169,53 @@ function Navbar() {
               )}
 
               {/* Admin Dropdown */}
-              {currentUser && isAdmin && (
-                <>
-                  <button
-                    onClick={() => { setAvatarOpen(false); navigate("/admin/analytics"); }}
-                    className="w-full px-4 py-2 text-left text-white hover:bg-white/10"
-                  >
-                    Analytics
-                  </button>
+{currentUser && isAdmin && (
+  <>
+    <button
+      onClick={() => { setAvatarOpen(false); navigate("/admin/analytics"); }}
+      className="w-full px-4 py-2 text-left text-white hover:bg-white/10"
+    >
+      Analytics
+    </button>
 
-                  <button
-                    onClick={() => { setAvatarOpen(false); navigate("/admin/manage-users"); }}
-                    className="w-full px-4 py-2 text-left text-white hover:bg-white/10"
-                  >
-                    Manage Users
-                  </button>
+    <button
+      onClick={() => { setAvatarOpen(false); navigate("/admin/manage-users"); }}
+      className="w-full px-4 py-2 text-left text-white hover:bg-white/10"
+    >
+      Manage Users
+    </button>
 
-                  <button
-                    onClick={() => { setAvatarOpen(false); navigate("/admin/cv-collections"); }}
-                    className="w-full px-4 py-2 text-left text-white hover:bg-white/10"
-                  >
-                    CV Collections
-                  </button>
+    {/* ✅ NEW */}
+    <button
+      onClick={() => { setAvatarOpen(false); navigate("/admin/manage-companies"); }}
+      className="w-full px-4 py-2 text-left text-white hover:bg-white/10"
+    >
+      Manage Companies
+    </button>
 
-                  <button
-                    onClick={handleLogout}
-                    className="w-full px-4 py-2 text-left text-red-400 hover:bg-white/10"
-                  >
-                    Logout
-                  </button>
-                </>
-              )}
+    {/* ✅ NEW */}
+    <button
+      onClick={() => { setAvatarOpen(false); navigate("/admin/manage-applications"); }}
+      className="w-full px-4 py-2 text-left text-white hover:bg-white/10"
+    >
+      Manage Applications
+    </button>
+
+    <button
+      onClick={() => { setAvatarOpen(false); navigate("/admin/cv-collections"); }}
+      className="w-full px-4 py-2 text-left text-white hover:bg-white/10"
+    >
+      CV Collections
+    </button>
+
+    <button
+      onClick={handleLogout}
+      className="w-full px-4 py-2 text-left text-red-400 hover:bg-white/10"
+    >
+      Logout
+    </button>
+  </>
+)}
 
               {/* User Dropdown */}
 {currentUser && !isAdmin && !currentUser?.companyId && (
@@ -351,14 +367,53 @@ function Navbar() {
             )}
 
             {/* Admin Mobile Dropdown */}
-            {currentUser && isAdmin && (
-              <>
-                <button onClick={() => { setMobileMenu(false); navigate("/admin/analytics"); }} className="w-full py-2 rounded-lg text-white bg-green-600">Analytics</button>
-                <button onClick={() => { setMobileMenu(false); navigate("/admin/manage-users"); }} className="w-full py-2 rounded-lg text-white bg-green-600">Manage Users</button>
-                <button onClick={() => { setMobileMenu(false); navigate("/admin/cv-collections"); }} className="w-full py-2 rounded-lg text-white bg-green-600">CV Collections</button>
-                <button onClick={() => { setMobileMenu(false); handleLogout(); }} className="px-6 py-2 rounded-lg border border-red-400 text-red-400 hover:bg-red-500/10 transition">Logout</button>
-              </>
-            )}
+{currentUser && isAdmin && (
+  <>
+    <button
+      onClick={() => { setMobileMenu(false); navigate("/admin/analytics"); }}
+      className="w-full py-2 rounded-lg text-white bg-green-600"
+    >
+      Analytics
+    </button>
+
+    <button
+      onClick={() => { setMobileMenu(false); navigate("/admin/manage-users"); }}
+      className="w-full py-2 rounded-lg text-white bg-green-600"
+    >
+      Manage Users
+    </button>
+
+    {/* ✅ NEW */}
+    <button
+      onClick={() => { setMobileMenu(false); navigate("/admin/manage-companies"); }}
+      className="w-full py-2 rounded-lg text-white bg-green-600"
+    >
+      Manage Companies
+    </button>
+
+    {/* ✅ NEW */}
+    <button
+      onClick={() => { setMobileMenu(false); navigate("/admin/manage-applications"); }}
+      className="w-full py-2 rounded-lg text-white bg-green-600"
+    >
+      Manage Applications
+    </button>
+
+    <button
+      onClick={() => { setMobileMenu(false); navigate("/admin/cv-collections"); }}
+      className="w-full py-2 rounded-lg text-white bg-green-600"
+    >
+      CV Collections
+    </button>
+
+    <button
+      onClick={() => { setMobileMenu(false); handleLogout(); }}
+      className="px-6 py-2 rounded-lg border border-red-400 text-red-400 hover:bg-red-500/10 transition"
+    >
+      Logout
+    </button>
+  </>
+)}
 
             {/* User Mobile Dropdown */}
 {currentUser && !isAdmin && !currentUser?.companyId && (

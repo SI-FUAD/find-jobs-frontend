@@ -43,6 +43,8 @@ export default function Profile() {
 
   return {
     ...user,
+    careerTitle: user.careerTitle || "",
+    careerSummary: user.careerSummary || "",
     phone: user.phone || "",
     emergencyPhone: user.emergencyPhone || "",
     gender: user.gender || "",
@@ -56,8 +58,6 @@ export default function Profile() {
     certificates: user.certificates || [],
     links: user.links || [],
     savedJobs: user.savedJobs || [],
-    appliedJobs: user.appliedJobs || [],
-    shortlistedJobs: user.shortlistedJobs || [],
     profileCompletion: completion,
   };
 });
@@ -123,6 +123,11 @@ const handleChange = e => {
   };
 
   const handleSave = () => {
+    if (!form.careerTitle.trim() || !form.careerSummary.trim()) {
+      alert("Please complete Career Title and Career Summary");
+      return;
+    }
+
   if (
     !validateArraySection(form.education, ["level", "institute", "result", "year"], "Education") ||
     !validateArraySection(form.experience, ["company", "role", "duration", "skills"], "Work Experience") ||
@@ -287,6 +292,7 @@ const handleChange = e => {
   <input
     type="checkbox"
     checked={sameAddress}
+    disabled={!editMode}
     onChange={e => {
       const checked = e.target.checked;
       setSameAddress(checked);
@@ -303,6 +309,37 @@ const handleChange = e => {
 </label>
 
         </Section>
+
+        {/* Career Information */}
+<Section title="Career Information">
+  <div className="space-y-4">
+
+    {/* Title (half width like normal input) */}
+    <div className="md:w-1/2">
+      <Input
+        label="Professional Title"
+        name="careerTitle"
+        value={form.careerTitle}
+        onChange={handleChange}
+        disabled={!editMode}
+      />
+    </div>
+
+    {/* Summary (full width large field) */}
+    <div>
+      <label className="text-sm text-gray-500">Career Summary</label>
+      <textarea
+        name="careerSummary"
+        value={form.careerSummary}
+        onChange={handleChange}
+        disabled={!editMode}
+        rows="5"
+        className="w-full border rounded-lg p-3 mt-1"
+      />
+    </div>
+
+  </div>
+</Section>
 
         {/* Education */}
         <ArraySection

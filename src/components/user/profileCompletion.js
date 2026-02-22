@@ -14,6 +14,8 @@ export function calculateProfileCompletion(user) {
     "motherName",
     "currentAddress",
     "permanentAddress",
+    "careerTitle",
+    "careerSummary",
   ];
 
   baseFields.forEach(f => {
@@ -43,7 +45,7 @@ export function calculateProfileCompletion(user) {
     });
   });
 
-  const TOTAL = 11 + 12 + 4 + 4; // 31 fields
+  const TOTAL = 13 + 12 + 4 + 4; // 33 fields
 
   const percent = Math.floor((filled / TOTAL) * 100 / 5) * 5;
   return Math.min(percent, 100);
