@@ -160,6 +160,13 @@ function Navbar() {
                   </button>
 
                   <button
+                    onClick={() => { setAvatarOpen(false); navigate("/company/candidates"); }}
+                    className="w-full px-4 py-2 text-left text-white hover:bg-white/10"
+                  >
+                    Candidates
+                  </button>
+
+                  <button
                     onClick={handleLogout}
                     className="w-full px-4 py-2 text-left text-red-400 hover:bg-white/10"
                   >
@@ -256,10 +263,10 @@ function Navbar() {
     </button>
 
     <button
-      onClick={() => { setAvatarOpen(false); navigate("/shortlisted-jobs"); }}
+      onClick={() => { setAvatarOpen(false); navigate("/applied-jobs-status"); }}
       className="w-full px-4 py-2 text-left text-gray-300 hover:bg-white/10"
     >
-      Shortlisted Jobs
+      Applied Jobs Status
     </button>
 
     <button
@@ -362,6 +369,7 @@ function Navbar() {
                 <button onClick={() => { setMobileMenu(false); navigate("/company"); }} className="w-full py-2 rounded-lg text-white bg-orange-500">Dashboard</button>
                 <button onClick={() => { setMobileMenu(false); navigate("/company/add-job"); }} className="w-full py-2 rounded-lg text-white bg-orange-500">Add Job</button>
                 <button onClick={() => { setMobileMenu(false); navigate("/company/manage-jobs"); }} className="w-full py-2 rounded-lg text-white bg-orange-500">Manage Jobs</button>
+                <button onClick={() => { setMobileMenu(false); navigate("/company/candidates"); }} className="w-full py-2 rounded-lg text-white bg-orange-500">Candidates</button>
                 <button onClick={() => { setMobileMenu(false); handleLogout(); }} className="px-6 py-2 rounded-lg border border-red-400 text-red-400 hover:bg-red-500/10 transition">Logout</button>
               </>
             )}
@@ -454,10 +462,10 @@ function Navbar() {
     </button>
 
     <button
-      onClick={() => { setMobileMenu(false); navigate("/shortlisted-jobs"); }}
+      onClick={() => { setMobileMenu(false); navigate("/applied-jobs-status"); }}
       className="w-full py-2 rounded-lg text-white bg-blue-600 hover:bg-blue-700"
     >
-      Shortlisted Jobs
+      Applied Jobs Status
     </button>
 
     <button

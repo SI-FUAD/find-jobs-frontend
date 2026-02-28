@@ -171,7 +171,8 @@ const handleChange = e => {
   /* ================= UI ================= */
 
   return (
-    <div className="min-h-screen bg-blue-50 pt-24 px-4 md:px-8">
+    <div className="min-h-screen bg-blue-50 pt-24 md:pt-32 px-4 md:px-12">
+      <h1 className="text-3xl font-bold text-blue-900 mb-8">My Profile</h1>
       <div className="max-w-5xl mx-auto bg-white rounded-xl shadow p-6 space-y-8">
 
         {/* ===== Profile Header ===== */}

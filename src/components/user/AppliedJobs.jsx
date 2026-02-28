@@ -48,8 +48,8 @@ export default function AppliedJobs() {
     );
 
   return (
-    <div className="p-6">
-      <h1 className="text-2xl font-bold mb-6">
+    <div className="min-h-screen bg-blue-50 pt-24 md:pt-32 px-4 md:px-12">
+      <h1 className="text-3xl font-bold text-blue-900 mb-8">
         Applied Jobs
       </h1>
 

@@ -9,6 +9,7 @@ import About from "./components/home/About";
 import Login from "./components/home/Login";
 import Register from "./components/home/Register";
 import Footer from "./components/home/Footer";
+import NotFound from "./components/home/NotFound";
 import Dashboard from "./components/user/Dashboard";
 import Profile from "./components/user/Profile";
 import UserLayout from "./components/user/UserLayout";
@@ -28,10 +29,12 @@ import AddJobPost from "./components/companies/AddJobPost";
 import ManageJobPosts from "./components/companies/ManageJobPosts";
 import EditJobPost from "./components/companies/EditJobPost";
 import ViewJobPost from "./components/companies/ViewJobPost";
+import CompanyCandidates from "./components/companies/CompanyCandidates";
+import CompanyViewUserCV from "./components/companies/CompanyViewUserCV";
 import MyCV from "./components/user/MyCV";
 import SavedJobs from "./components/user/SavedJobs";
 import AppliedJobs from "./components/user/AppliedJobs";
-import ShortlistedJobs from "./components/user/ShortlistedJobs";
+import AppliedJobsStatus from "./components/user/AppliedJobsStatus";
 import JobView from "./components/jobs/JobView";
 
 function App() {
@@ -130,7 +133,7 @@ function App() {
           <Route path="/my-cv" element={<MyCV />} />
           <Route path="/saved-jobs" element={<SavedJobs />} />
           <Route path="/applied-jobs" element={<AppliedJobs />} />
-          <Route path="/shortlisted-jobs" element={<ShortlistedJobs />} />
+          <Route path="/applied-jobs-status" element={<AppliedJobsStatus />} />
         </Route>
 
         {/* ===== Admin Pages ===== */}
@@ -151,9 +154,12 @@ function App() {
           <Route path="manage-jobs" element={<ManageJobPosts />} />
           <Route path="view-job/:id" element={<ViewJobPost />} />
           <Route path="edit-job/:id" element={<EditJobPost />} />
+          <Route path="candidates" element={<CompanyCandidates />} />
+          <Route path="view-cv/:userId" element={<CompanyViewUserCV />}/>
         </Route>
 
         <Route path="/jobs/:id" element={<JobView />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
   );

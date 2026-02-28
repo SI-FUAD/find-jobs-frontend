@@ -1,10 +1,24 @@
-function Home() {
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+export default function Home() {
+  const [jobTitle, setJobTitle] = useState("");
+  const [location, setLocation] = useState("");
+  const navigate = useNavigate();
+
+  const handleSearch = () => {
+    // Pass filters via query params
+    const params = new URLSearchParams();
+    if (jobTitle) params.append("title", jobTitle);
+    if (location) params.append("location", location);
+
+    navigate(`/jobs?${params.toString()}`);
+  };
+
   return (
     <section
       className="relative min-h-screen bg-cover bg-center"
-      style={{
-        backgroundImage: "url('/src/assets/hero-bg.png')",
-      }}
+      style={{ backgroundImage: "url('/src/assets/hero-bg.png')" }}
     >
       <div className="absolute inset-0 bg-black/55"></div>
 
@@ -25,13 +39,20 @@ function Home() {
                 type="text"
                 placeholder="Job title or keyword"
                 className="flex-1 px-4 py-3 rounded-lg outline-none text-black"
+                value={jobTitle}
+                onChange={(e) => setJobTitle(e.target.value)}
               />
               <input
                 type="text"
                 placeholder="Location"
                 className="flex-1 px-4 py-3 rounded-lg outline-none text-black"
+                value={location}
+                onChange={(e) => setLocation(e.target.value)}
               />
-              <button className="px-8 py-3 rounded-lg bg-blue-600 hover:bg-blue-700 transition">
+              <button
+                onClick={handleSearch}
+                className="px-8 py-3 rounded-lg bg-blue-600 hover:bg-blue-700 transition"
+              >
                 Search
               </button>
             </div>
@@ -42,5 +63,3 @@ function Home() {
     </section>
   );
 }
-
-export default Home;

@@ -27,27 +27,35 @@ function MyCV() {
   };
 
   return (
-    <div className="max-w-5xl mx-auto px-4">
+    <div className="min-h-screen bg-blue-50 pt-24 md:pt-32 px-4 md:px-12">
 
-      {/* Actions */}
-      <div className="no-print flex justify-end items-center gap-3 mb-4">
-        <button
-          onClick={handleDownload}
-          className="px-4 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700"
-        >
-          Download CV
-        </button>
+      {/* Page Title */}
+      <h1 className="text-3xl font-bold text-blue-900 mb-8">
+        My CV
+      </h1>
 
-        <button
-          onClick={handlePrint}
-          className="px-4 py-2 rounded-lg border border-blue-600 text-blue-600 hover:bg-blue-50"
-        >
-          Print
-        </button>
+      <div className="max-w-5xl mx-auto">
+
+        {/* Actions */}
+        <div className="no-print flex justify-end items-center gap-3 mb-4">
+          <button
+            onClick={handleDownload}
+            className="px-4 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700"
+          >
+            Download CV
+          </button>
+
+          <button
+            onClick={handlePrint}
+            className="px-4 py-2 rounded-lg border border-blue-600 text-blue-600 hover:bg-blue-50"
+          >
+            Print
+          </button>
+        </div>
+
+        {/* CV Template */}
+        <CVTemplate user={user} />
       </div>
-
-      {/* CV Template */}
-      <CVTemplate user={user} />
     </div>
   );
 }

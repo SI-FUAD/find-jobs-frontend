@@ -23,10 +23,14 @@ function CompanyLayout() {
     }`;
 
   return (
-    <div className="bg-orange-50 pt-20 flex h-[calc(100vh-5rem)] overflow-hidden">
+    <div
+    id="company-layout-wrapper"
+    className="bg-orange-50 pt-20 flex h-[calc(100vh-5rem)] overflow-hidden">
 
       {/* Mobile Header */}
-      <div className="fixed top-20 left-0 right-0 bg-white border-b z-40 md:hidden flex justify-between items-center px-4 py-3">
+      <div
+      id="company-mobile-header"
+      className="fixed top-20 left-0 right-0 bg-white border-b z-40 md:hidden flex justify-between items-center px-4 py-3">
         <h1 className="font-bold text-orange-600 text-lg">Company Panel</h1>
         <button
           onClick={() => setOpen(!open)}
@@ -64,6 +68,10 @@ function CompanyLayout() {
             Manage Jobs
           </NavLink>
 
+          <NavLink to="/company/candidates" className={navLinkClass} onClick={() => setOpen(false)}>
+            Candidates
+          </NavLink>
+
           <br />
           <button
             onClick={handleLogout}
@@ -75,7 +83,9 @@ function CompanyLayout() {
       </aside>
 
       {/* Main Content */}
-      <main className="flex-1 p-4 md:p-6 mt-12 md:mt-0 overflow-y-auto">
+      <main
+      id="company-scroll"
+      className="flex-1 p-4 md:p-6 mt-12 md:mt-0 overflow-y-auto">
         <Outlet />
       </main>
     </div>

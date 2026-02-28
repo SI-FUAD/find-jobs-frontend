@@ -75,8 +75,8 @@ function UserLayout() {
           Applied Jobs
         </NavLink>
 
-        <NavLink to="/shortlisted-jobs" onClick={() => setOpen(false)} className={linkClass}>
-          Shortlisted Jobs
+        <NavLink to="/applied-jobs-status" onClick={() => setOpen(false)} className={linkClass}>
+          Applied Jobs Status
         </NavLink>
 
         <br />

@@ -60,8 +60,8 @@ const currentUser =
 
   return (
   <>
-    <div className="min-h-screen bg-gray-50 pt-24 md:pt-32 p-4 md:p-12 space-y-6">
-      <h1 className="text-3xl font-bold text-gray-800">
+    <div className="min-h-screen bg-blue-50 pt-24 md:pt-32 px-4 md:px-12 space-y-6">
+      <h1 className="text-3xl font-bold text-blue-900 mb-8">
         Saved Jobs
       </h1>
 

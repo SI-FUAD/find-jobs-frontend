@@ -16,13 +16,14 @@ export default function ManageUsers() {
 
     const lower = search.toLowerCase();
 
-    return users.filter(user =>
-      user.userId?.toLowerCase().includes(lower) ||
-      user.firstName?.toLowerCase().includes(lower) ||
-      user.lastName?.toLowerCase().includes(lower) ||
-      user.email?.toLowerCase().includes(lower)
-    );
-  }, [users, search]);
+    return users.filter(user => {
+      const fullName = `${user.firstName} ${user.lastName}`.toLowerCase();
+      return (
+        user.userId?.toLowerCase().includes(lower) ||
+        fullName.includes(lower) ||
+        user.email?.toLowerCase().includes(lower) ||
+        (user.phone || "").toLowerCase().includes(lower)
+      );});}, [users, search]);
 
   const handleDelete = (userId) => {
     setUserToDelete(userId);
@@ -55,7 +56,7 @@ export default function ManageUsers() {
 
           <input
             type="text"
-            placeholder="Search by ID, first name, last name or email..."
+            placeholder="Search by ID, name, email or phone..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             className="w-full md:w-[500px] px-4 py-2 border border-blue-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 bg-white"

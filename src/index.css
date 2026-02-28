@@ -25,6 +25,7 @@
   #main-navbar,
   #user-mobile-header,
   #admin-mobile-header,
+  #company-mobile-header,
   aside,
   .no-print {
     display: none !important;
@@ -63,5 +64,10 @@
   main {
     overflow: visible !important;
     height: auto !important;
+  }
+
+  #company-layout-wrapper {
+    height: auto !important;
+    overflow: visible !important;
   }
 }
