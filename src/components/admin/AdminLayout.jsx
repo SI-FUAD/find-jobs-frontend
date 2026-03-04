@@ -78,20 +78,28 @@ function AdminLayout() {
           </NavLink>
 
           <NavLink
-  to="/admin/manage-companies"
-  onClick={() => setOpen(false)}
-  className={linkClass}
->
-  Manage Companies
-</NavLink>
-
-<NavLink
-  to="/admin/manage-applications"
-  onClick={() => setOpen(false)}
-  className={linkClass}
->
-  Manage Applications
-</NavLink>
+            to="/admin/manage-companies"
+            onClick={() => setOpen(false)}
+            className={linkClass}
+          >
+            Manage Companies
+          </NavLink>
+            
+          <NavLink
+            to="/admin/manage-jobs"
+            onClick={() => setOpen(false)}
+            className={linkClass}
+          >
+            Manage Jobs
+          </NavLink>
+            
+          <NavLink
+            to="/admin/manage-applications"
+            onClick={() => setOpen(false)}
+            className={linkClass}
+          >
+            Manage Applications
+          </NavLink>
 
           <NavLink
             to="/admin/cv-collections"

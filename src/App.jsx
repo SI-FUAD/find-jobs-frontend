@@ -19,6 +19,8 @@ import ManageUsers from "./components/admin/ManageUsers";
 import AdminViewUserCV from "./components/admin/AdminViewUserCV";
 import ManageCompanies from "./components/admin/ManageCompanies";
 import AdminCompanyDetails from "./components/admin/AdminCompanyDetails";
+import ManageJobs from "./components/admin/ManageJobs";
+import AdminJobDetails from "./components/admin/AdminJobDetails";
 import ManageApplications from "./components/admin/ManageApplications";
 import CvCollection from "./components/admin/CvCollection";
 import CompanyLogin from "./components/companies/CompanyLogin";
@@ -137,15 +139,17 @@ function App() {
         </Route>
 
         {/* ===== Admin Pages ===== */}
-<Route path="/admin" element={<AdminLayout />}>
-  <Route path="analytics" element={<Analytics />} />
-  <Route path="manage-users" element={<ManageUsers />} />
-  <Route path="manage-companies" element={<ManageCompanies />} />
-  <Route path="manage-applications" element={<ManageApplications />} />
-  <Route path="cv-collections" element={<CvCollection />} />
-  <Route path="view-cv/:userId" element={<AdminViewUserCV />} />
-  <Route path="company-details/:companyId" element={<AdminCompanyDetails />} />
-</Route>
+        <Route path="/admin" element={<AdminLayout />}>
+          <Route path="analytics" element={<Analytics />} />
+          <Route path="manage-users" element={<ManageUsers />} />
+          <Route path="manage-companies" element={<ManageCompanies />} />
+          <Route path="manage-jobs" element={<ManageJobs />} />
+          <Route path="manage-applications" element={<ManageApplications />} />
+          <Route path="cv-collections" element={<CvCollection />} />
+          <Route path="view-cv/:userId" element={<AdminViewUserCV />} />
+          <Route path="company-details/:companyId" element={<AdminCompanyDetails />} />
+          <Route path="job-details/:jobId" element={<AdminJobDetails />} />
+        </Route>
 
         {/* ===== Company Panel ===== */}
         <Route path="/company" element={<CompanyLayout />}>

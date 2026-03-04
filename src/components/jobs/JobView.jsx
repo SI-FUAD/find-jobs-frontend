@@ -12,6 +12,10 @@ export default function JobView() {
   const [modal, setModal] = useState(null); // null | "confirm" | "success"
 
   const job = data?.jobs?.find(j => j.id === id);
+  const isExpired =
+  job &&
+  new Date(job.deadline) <
+    new Date(new Date().toISOString().split("T")[0]);
   const currentUser =
     data?.others?.find(o => o.type === "currentUser")?.data || null;
 
@@ -140,7 +144,14 @@ const handleApply = () => {
         ← Back
       </button>
 
-      <div className="max-w-4xl mx-auto bg-white rounded-2xl shadow-lg p-6 md:p-10 space-y-6">
+      <div className="relative max-w-4xl mx-auto bg-white rounded-2xl shadow-lg p-6 md:p-10 space-y-6">
+
+        {/* EXPIRED BADGE */}
+        {isExpired && (
+          <div className="absolute top-6 right-6 bg-red-600 text-white px-3 py-1 text-xs font-semibold rounded-full shadow">
+            Expired
+          </div>
+        )}
 
         {/* Header */}
         <div className="border-b pb-6">
@@ -157,7 +168,7 @@ const handleApply = () => {
           <Detail label="Experience" value={job.experience} />
           <Detail label="Salary" value={job.salary} />
           <Detail label="Date Posted" value={job.datePosted} />
-          <Detail label="Deadline" value={job.deadline} />
+          <Detail label="Deadline" value={job.deadline} className="text-red-600" />
         </div>
 
         {/* Description */}
@@ -314,11 +325,11 @@ const handleApply = () => {
 }
 
 // ---------------- Detail Component ----------------
-function Detail({ label, value }) {
+function Detail({ label, value, className }) {
   return (
     <div className="bg-gray-100 rounded-lg p-4">
       <p className="text-sm text-gray-500">{label}</p>
-      <p className="font-semibold mt-1">{value}</p>
+      <p className={`font-semibold mt-1 ${className || ""}`}>{value}</p>
     </div>
   );
 }

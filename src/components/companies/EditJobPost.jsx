@@ -22,22 +22,30 @@ export default function EditJobPost() {
   };
 
   const handleSubmit = e => {
-    e.preventDefault();
+  e.preventDefault();
 
-    // ✅ create new jobs array (NO mutation)
-    const updatedJobs = storedData.jobs.map(j =>
-      j.id === id ? { ...form } : j
-    );
+  const today = new Date().toISOString().split("T")[0];
 
-    // ✅ create new data object
-    const updatedData = {
-      ...storedData,
-      jobs: updatedJobs
-    };
+  // 🚨 Prevent past deadline
+  if (form.deadline < today) {
+    alert("Deadline cannot be in the past.");
+    return;
+  }
 
-    localStorage.setItem("Find Jobs Data", JSON.stringify(updatedData));
-    navigate("/company/manage-jobs");
+  // ✅ create new jobs array (NO mutation)
+  const updatedJobs = storedData.jobs.map(j =>
+    j.id === id ? { ...form } : j
+  );
+
+  // ✅ create new data object
+  const updatedData = {
+    ...storedData,
+    jobs: updatedJobs
   };
+
+  localStorage.setItem("Find Jobs Data", JSON.stringify(updatedData));
+  navigate("/company/manage-jobs");
+};
 
   return (
     <div className="min-h-screen bg-orange-50 p-6 pt-24">

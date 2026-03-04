@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import JobCard from "../jobs/JobCard";
 
 export default function Companies() {
-  const [search, setSearch] = useState(""); // New search state
+  const [search, setSearch] = useState("");
 
   const [data, setData] = useState(() => {
     return (
@@ -44,29 +44,51 @@ export default function Companies() {
     };
 
     window.addEventListener("authChanged", handleAuthChange);
-
     return () => {
       window.removeEventListener("authChanged", handleAuthChange);
     };
   }, []);
 
-  // Filter companies based on search input
-  const filteredCompanies = data.companies.filter((company) =>
-    company.brandName.toLowerCase().includes(search.toLowerCase())
-  );
+  // ================= ACTIVE JOBS ONLY =================
+  // Fix: today moved inside useMemo
+
+  const activeJobs = useMemo(() => {
+    const today = new Date();
+
+    return data.jobs.filter((job) => {
+      if (!job.deadline) return false;
+      return new Date(job.deadline) >= today;
+    });
+  }, [data.jobs]);
+
+  // ================= FILTER COMPANIES =================
+
+  const filteredCompanies = useMemo(() => {
+    return data.companies.filter((company) => {
+      const companyActiveJobs = activeJobs.filter(
+        (j) => j.companyId === company.companyId
+      );
+
+      if (!companyActiveJobs.length) return false;
+
+      return company.brandName
+        .toLowerCase()
+        .includes(search.toLowerCase());
+    });
+  }, [data.companies, activeJobs, search]);
 
   return (
     <div className="min-h-screen bg-gray-50 pt-24 md:pt-32 p-4 md:p-12 space-y-10">
-      {/* Page Header with Responsive Search */}
+
+      {/* Header */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-2 md:gap-0">
         <h1 className="text-3xl font-bold text-gray-800">
-          Companies & Jobs
+          Companies & Their Active Job Opportunities
         </h1>
 
-        {/* Search Bar */}
         <input
           type="text"
-          placeholder="Search for a company to view its jobs"
+          placeholder="Search for a company to view its active jobs"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           className="border rounded-lg px-3 py-2 w-full md:w-96 mt-2 md:mt-0"
@@ -74,25 +96,35 @@ export default function Companies() {
       </div>
 
       {filteredCompanies.map((company) => {
-        const companyJobs = data.jobs.filter(
+        const companyActiveJobs = activeJobs.filter(
           (j) => j.companyId === company.companyId
         );
 
-        if (!companyJobs.length) return null;
+        const activeCount = companyActiveJobs.length;
 
         return (
           <div key={company.companyId} className="space-y-6">
-            {/* Company Title */}
-            <h2
-              className="text-2xl font-semibold"
-              style={{ color: company.brandColor }}
-            >
-              {company.brandName}
-            </h2>
+
+            {/* Company Title + Active Count */}
+            <div className="flex items-center gap-3 flex-wrap">
+  <h2
+    className="text-2xl font-bold"
+    style={{ color: company.brandColor }}
+  >
+    {company.brandName}
+  </h2>
+
+  <span
+    className="text-2xl font-bold"
+    style={{ color: company.brandColor }}
+  >
+    ({activeCount} Active {activeCount === 1 ? "Job" : "Jobs"})
+  </span>
+</div>
 
             {/* Jobs Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {companyJobs.map((job) => (
+              {companyActiveJobs.map((job) => (
                 <JobCard
                   key={job.id}
                   job={job}
@@ -107,7 +139,9 @@ export default function Companies() {
       })}
 
       {filteredCompanies.length === 0 && (
-        <p className="text-gray-500">No companies found.</p>
+        <p className="text-gray-500">
+          No companies with active job listings found.
+        </p>
       )}
     </div>
   );

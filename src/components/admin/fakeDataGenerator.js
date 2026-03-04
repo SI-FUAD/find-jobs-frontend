@@ -27,6 +27,58 @@ const generateDigits = (length) => {
 const randomInt = (min, max) =>
   Math.floor(Math.random() * (max - min + 1)) + min;
 
+// Random past date within last 1 year (not future)
+const randomPastDateWithinYear = () => {
+  const today = new Date();
+  const past = new Date();
+  past.setFullYear(today.getFullYear() - 1);
+  const randomTime = randomInt(past.getTime(), today.getTime());
+  return new Date(randomTime);
+};
+
+const generateDeadline = (postedDate) => {
+  const posted = new Date(postedDate);
+  const today = new Date();
+
+  // 50% chance active, 50% expired
+  const isActive = Math.random() < 0.5;
+
+  if (isActive) {
+    // ACTIVE → future from today (max 3 months ahead)
+    const minTime = today.getTime() + 1;
+
+    const maxFuture = new Date();
+    maxFuture.setMonth(today.getMonth() + 3);
+    const maxTime = maxFuture.getTime();
+
+    const randomTime = randomInt(minTime, maxTime);
+    return new Date(randomTime);
+
+  } else {
+    // EXPIRED → past but not before posted date
+    const minTime = posted.getTime();
+    const maxTime = today.getTime() - 1;
+
+    // If posted date is today, force active
+    if (minTime >= maxTime) {
+      const future = new Date();
+      future.setMonth(today.getMonth() + 1);
+      return future;
+    }
+
+    const randomTime = randomInt(minTime, maxTime);
+    return new Date(randomTime);
+  }
+};
+
+// Generate application date AFTER job post date and NOT future
+const generateApplicationDate = (postedDate) => {
+  const today = new Date();
+  const min = new Date(postedDate);
+  const max = today;
+  const randomTime = randomInt(min.getTime(), max.getTime());
+  return new Date(randomTime);
+};
 
 // ================= NAME DATA =================
 
@@ -45,7 +97,6 @@ const lastNames = [
   "Karim","Chowdhury","Sarker","Hasan","Mahmud","Khan"
 ];
 
-
 // ================= CAREER TITLES =================
 
 const careerTitles = [
@@ -59,15 +110,20 @@ const careerTitles = [
   "DevOps Engineer","QA Engineer","Customer Support Executive"
 ];
 
-const careerSummaries = [
-  "Highly motivated professional with strong problem-solving skills and a passion for continuous learning. Experienced in collaborating with cross-functional teams to deliver high-quality results within deadlines.",
-  "Results-driven individual with hands-on experience in modern tools and technologies. Adept at managing multiple responsibilities while maintaining high standards of professionalism and efficiency.",
-  "Dedicated and performance-oriented professional with proven expertise in delivering innovative solutions. Strong communication skills and a commitment to achieving organizational goals.",
-  "Dynamic and detail-oriented individual with experience in fast-paced environments. Passionate about leveraging skills and knowledge to contribute effectively to company growth."
-];
-
+const careerSummaryText = `
+Results-driven professional with hands-on experience in modern technologies and industry best practices. Demonstrates strong analytical thinking, problem-solving abilities, and effective communication skills in cross-functional team environments. Proven ability to manage multiple responsibilities, meet deadlines, and deliver high-quality outcomes under pressure. Passionate about continuous learning, adapting to emerging trends, and contributing meaningfully to organizational growth through innovation, collaboration, and strategic execution.
+`;
 
 // ================= OTHER DATA =================
+
+const schools = [
+  "Dhaka Residential Model School",
+  "Ideal School and College",
+  "Viqarunnisa Noon School",
+  "Rajuk Uttara Model College",
+  "Scholastica School",
+  "Chittagong Collegiate School"
+];
 
 const universities = [
   "University of Dhaka","North South University",
@@ -76,9 +132,8 @@ const universities = [
 ];
 
 const locations = [
-  "Banani, Dhaka","Gulshan, Dhaka",
-  "Dhanmondi, Dhaka","Mirpur, Dhaka",
-  "Chattogram","Sylhet","Khulna","Rajshahi"
+  "Banani, Dhaka","Gulshan, Dhaka","Dhanmondi, Dhaka",
+  "Mirpur, Dhaka","Chattogram","Sylhet","Khulna","Rajshahi"
 ];
 
 const companyNames = [
@@ -88,7 +143,6 @@ const companyNames = [
   "FutureTech BD","InnovateX","Prime Holdings",
   "Global Ventures","Bright Future Ltd"
 ];
-
 
 // ================= PROFILE COMPLETION =================
 
@@ -131,12 +185,10 @@ function calculateProfileCompletion(user) {
   return Math.min(percent, 100);
 }
 
-
 // ================= MAIN GENERATOR =================
 
 export function generateFakeData() {
 
-  // -------- USERS (50) --------
   const users = [];
 
   for (let i = 0; i < 50; i++) {
@@ -159,19 +211,20 @@ export function generateFakeData() {
     const permanentAddress =
       Math.random() > 0.5 ? currentAddress : randomFromArray(locations);
 
-    // ----- EDUCATION (3-5) -----
     const educationLevels = ["SSC","HSC","Bachelors"];
     if (Math.random() > 0.5) educationLevels.push("Masters");
     if (Math.random() > 0.7) educationLevels.push("PhD");
 
     const education = educationLevels.map(level => ({
       level,
-      institute: randomFromArray(universities),
+      institute:
+        level === "SSC" || level === "HSC"
+          ? randomFromArray(schools)
+          : randomFromArray(universities),
       result: (2.5 + Math.random() * 2).toFixed(2),
       year: `${randomInt(2008,2016)}-${randomInt(2017,2024)}`
     }));
 
-    // ----- EXPERIENCE (1-4) -----
     const experience = [];
     const expCount = randomInt(1,4);
 
@@ -184,29 +237,19 @@ export function generateFakeData() {
       });
     }
 
-    // ----- CERTIFICATES (0-2) -----
     const certificates = [];
     if (Math.random() > 0.5) {
       certificates.push({
-        title: "Professional Certification",
-        institute: "Udemy",
+        name: "Professional Certification",
+        organization: "Udemy",
         year: randomInt(2018,2024).toString()
       });
     }
 
-    // ----- LINKS (2-5) -----
     const links = [
       { label: "LinkedIn", url: "https://linkedin.com/in/sample" },
       { label: "GitHub", url: "https://github.com/sample" }
     ];
-
-    const extraLinks = randomInt(0,3);
-    for (let k = 0; k < extraLinks; k++) {
-      links.push({
-        label: "Portfolio",
-        url: "https://portfolio.com/sample"
-      });
-    }
 
     const user = {
       userId: `u_${generateDigits(6)}`,
@@ -217,7 +260,7 @@ export function generateFakeData() {
       email: `${firstName.toLowerCase()}${i}@gmail.com`,
       password: "123456",
       careerTitle: randomFromArray(careerTitles),
-      careerSummary: randomFromArray(careerSummaries),
+      careerSummary: careerSummaryText,
       phone: `01${generateDigits(9)}`,
       emergencyPhone: `01${generateDigits(9)}`,
       gender,
@@ -238,7 +281,6 @@ export function generateFakeData() {
     users.push(user);
   }
 
-  // -------- COMPANIES (30) --------
   const companies = [];
 
   for (let i = 0; i < 30; i++) {
@@ -254,15 +296,13 @@ export function generateFakeData() {
     });
   }
 
-  // -------- JOBS (100) --------
   const jobs = [];
 
   for (let i = 0; i < 100; i++) {
     const company = randomFromArray(companies);
 
-    const today = new Date();
-    const deadline = new Date();
-    deadline.setDate(today.getDate() + randomInt(7,30));
+    const postedDateObj = randomPastDateWithinYear();
+    const deadlineObj = generateDeadline(postedDateObj);
 
     jobs.push({
       id: `j_${generateDigits(10)}`,
@@ -271,29 +311,43 @@ export function generateFakeData() {
       title: randomFromArray(careerTitles),
       level: randomFromArray(["Fresher","Entry Level","Mid Level","Senior"]),
       location: randomFromArray(locations),
-      description: "We are seeking a motivated professional to join our dynamic team and contribute to our growing success.",
+      description: `We are looking for a dedicated professional to join our dynamic team. The ideal candidate will have a strong work ethic, excellent communication skills, and a passion for delivering high-quality results. You will be responsible for collaborating with cross-functional teams, managing projects from inception to completion, and continuously seeking opportunities to improve processes and drive innovation. This role offers the chance to grow professionally while contributing to meaningful projects that impact our organization and clients positively.`,
       vacancy: randomInt(1,5),
       experience: randomFromArray(["Fresher","1-2 years","2-4 years","5+ years"]),
-      salary: String(25000 + Math.floor(Math.random() * 80000)),
-      datePosted: today.toISOString().split("T")[0],
-      deadline: deadline.toISOString().split("T")[0]
+      salary: Math.random() > 0.5
+        ? "Negotiable"
+        : String(25000 + Math.floor(Math.random() * 80000)),
+      datePosted: postedDateObj.toISOString().split("T")[0],
+      deadline: deadlineObj.toISOString().split("T")[0]
     });
   }
 
-  // -------- APPLICATIONS (400) --------
   const applications = [];
+  const statusOptions = ["Applied", "Shortlisted", "Accepted", "Rejected"];
 
   for (let i = 0; i < 400; i++) {
     const user = randomFromArray(users);
     const job = randomFromArray(jobs);
 
+    const appliedDateObj = generateApplicationDate(job.datePosted);
+
+    const status = randomFromArray(statusOptions);
+
+    let dateUpdated = null;
+    if (status !== "Applied") {
+      const minDate = new Date(job.datePosted).getTime();
+      const maxDate = new Date().getTime();
+      const randomTime = randomInt(minDate, maxDate);
+      dateUpdated = new Date(randomTime).toISOString();
+    }
+
     applications.push({
       id: `a_${generateDigits(10)}`,
       jobId: job.id,
       userId: user.userId,
-      status: "Applied",
-      dateApplied: new Date().toISOString(),
-      dateUpdated: null
+      status,
+      dateApplied: appliedDateObj.toISOString(),
+      dateUpdated
     });
 
     user.appliedJobs.push(job.id);

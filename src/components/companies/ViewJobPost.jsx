@@ -18,6 +18,11 @@ export default function ViewJobPost() {
 
   if (!job) return <p className="p-6 text-red-500">Job not found</p>;
 
+  /* ================= STATUS CHECK (Same as Admin) ================= */
+  const isExpired =
+    new Date(job.deadline) <
+    new Date(new Date().toISOString().split("T")[0]);
+
   return (
     <div className="min-h-screen bg-orange-50 px-4 py-20">
       <div className="max-w-4xl mx-auto bg-white rounded-xl shadow overflow-hidden">
@@ -26,6 +31,17 @@ export default function ViewJobPost() {
         <div className="bg-orange-500 text-white px-6 py-5">
           <h2 className="text-2xl font-bold">{job.title}</h2>
           <p className="mt-1 text-orange-100 font-medium">{job.level}</p>
+
+          {/* STATUS BADGE (Same as Admin) */}
+          <div className="mt-3">
+            <span
+              className={`px-6 py-2 rounded-2xl text-lg font-semibold ${
+                isExpired ? "bg-red-600 text-white" : "bg-green-700 text-white"
+              }`}
+            >
+              {isExpired ? "Expired" : "Active"}
+            </span>
+          </div>
         </div>
 
         {/* Content */}

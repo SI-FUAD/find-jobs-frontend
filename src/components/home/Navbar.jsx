@@ -192,7 +192,6 @@ function Navbar() {
       Manage Users
     </button>
 
-    {/* ✅ NEW */}
     <button
       onClick={() => { setAvatarOpen(false); navigate("/admin/manage-companies"); }}
       className="w-full px-4 py-2 text-left text-white hover:bg-white/10"
@@ -200,7 +199,13 @@ function Navbar() {
       Manage Companies
     </button>
 
-    {/* ✅ NEW */}
+    <button
+      onClick={() => { setAvatarOpen(false); navigate("/admin/manage-jobs"); }}
+      className="w-full px-4 py-2 text-left text-white hover:bg-white/10"
+    >
+      Manage Jobs
+    </button>
+
     <button
       onClick={() => { setAvatarOpen(false); navigate("/admin/manage-applications"); }}
       className="w-full px-4 py-2 text-left text-white hover:bg-white/10"
@@ -391,7 +396,6 @@ function Navbar() {
       Manage Users
     </button>
 
-    {/* ✅ NEW */}
     <button
       onClick={() => { setMobileMenu(false); navigate("/admin/manage-companies"); }}
       className="w-full py-2 rounded-lg text-white bg-green-600"
@@ -399,7 +403,13 @@ function Navbar() {
       Manage Companies
     </button>
 
-    {/* ✅ NEW */}
+    <button
+     onClick={() => { setMobileMenu(false); navigate("/admin/manage-jobs"); }}
+     className="w-full py-2 rounded-lg text-white bg-green-600"
+    >
+      Manage Jobs
+    </button>
+
     <button
       onClick={() => { setMobileMenu(false); navigate("/admin/manage-applications"); }}
       className="w-full py-2 rounded-lg text-white bg-green-600"

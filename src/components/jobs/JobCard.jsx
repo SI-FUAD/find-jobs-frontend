@@ -34,6 +34,9 @@ export default function JobCard({ job, currentUser, data, setData, onUnsave }) {
   );
 
   const showButtons = isLoggedOut || isUser;
+  const isExpired =
+  new Date(job.deadline) <
+  new Date(new Date().toISOString().split("T")[0]);
 
   const formatDate = (dateStr) => {
     if (!dateStr) return "-";
@@ -149,9 +152,16 @@ export default function JobCard({ job, currentUser, data, setData, onUnsave }) {
   return (
     <>
       <div
-        onClick={() => navigate(`/jobs/${job.id}`)}
-        className="bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col h-full cursor-pointer"
-      >
+  onClick={() => navigate(`/jobs/${job.id}`)}
+  className="relative bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col h-full cursor-pointer"
+>
+
+  {/* EXPIRED BADGE */}
+  {isExpired && (
+    <div className="absolute top-4 right-4 bg-red-600 text-white px-3 py-1 text-xs font-semibold rounded-full shadow">
+      Expired
+    </div>
+  )}
         {/* CONTENT */}
         <div className="space-y-4">
           <div
