@@ -21,7 +21,7 @@ export default function Home() {
   return (
     <section
       className="relative min-h-screen bg-cover bg-center"
-      style={{ backgroundImage: "url('/src/assets/hero-bg.png')" }}
+      style={{ backgroundImage: "url('/hero-bg.png')" }}
     >
       <div className="absolute inset-0 bg-black/55"></div>
 
