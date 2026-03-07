@@ -1,7 +1,9 @@
 import { useState, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
+import usePageTitle from "../home/usePageTitle";
 
 export default function ManageCompanies() {
+  usePageTitle("Admin Manage Companies");
   const navigate = useNavigate();
 
   const companies = useMemo(() => {

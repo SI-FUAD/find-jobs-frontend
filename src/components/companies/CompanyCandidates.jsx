@@ -1,7 +1,9 @@
 import { useMemo } from "react";
 import { useNavigate } from "react-router-dom";
+import usePageTitle from "../home/usePageTitle";
 
 export default function CompanyCandidates() {
+  usePageTitle("Company Job Candidates");
   const navigate = useNavigate();
   const storedData = JSON.parse(localStorage.getItem("Find Jobs Data")) || {
     users: [],

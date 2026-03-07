@@ -1,4 +1,5 @@
 import { useParams, useNavigate } from "react-router-dom";
+import usePageTitle from "../home/usePageTitle";
 import html2pdf from "html2pdf.js";
 import CVTemplate from "../user/CVTemplate";
 
@@ -8,6 +9,8 @@ export default function CompanyViewUserCV() {
   
   const data = JSON.parse(localStorage.getItem("Find Jobs Data"));
   const user = data?.users.find((u) => u.userId === userId);
+
+  usePageTitle(user ? `Company View CV ${user.firstName} ${user.lastName}` : "Company User Not Found");
 
   if (!user)
     return <p className="p-6 text-red-500">User not found</p>;

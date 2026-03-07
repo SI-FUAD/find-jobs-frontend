@@ -1,6 +1,8 @@
 import { useMemo, useState } from "react";
+import usePageTitle from "../home/usePageTitle";
 
 export default function CompanyDashboard() {
+  usePageTitle("Company Dashboard");
   const storedData = JSON.parse(localStorage.getItem("Find Jobs Data")) || {
     jobs: [],
     applications: [],

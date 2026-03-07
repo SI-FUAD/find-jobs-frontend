@@ -1,5 +1,6 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useMemo, useState } from "react";
+import usePageTitle from "../home/usePageTitle";
 
 export default function AdminCompanyDetails() {
   const { companyId } = useParams();
@@ -15,6 +16,8 @@ export default function AdminCompanyDetails() {
   const company = storedData.companies.find(
     (c) => c.companyId === companyId
   );
+
+  usePageTitle(company ? `Admin Company Details ${company.brandName}` : "Admin Company Not Found");
 
   const today = new Date().toISOString().split("T")[0];
 

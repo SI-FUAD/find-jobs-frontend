@@ -34,5 +34,3 @@ createRoot(document.getElementById('root')).render(
     </BrowserRouter>
   </StrictMode>,
 )
-
-console.log(localStorage.getItem("Find Jobs Data"));

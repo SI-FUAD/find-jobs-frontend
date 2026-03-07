@@ -1,7 +1,9 @@
 import { useState } from "react";
+import usePageTitle from "../home/usePageTitle";
 import { calculateProfileCompletion } from "./profileCompletion";
 
 export default function Profile() {
+  usePageTitle("Complete Profile");
   const stored =
     JSON.parse(localStorage.getItem("Find Jobs Data")) || {
       users: [],

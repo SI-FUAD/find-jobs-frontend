@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
+import usePageTitle from "../home/usePageTitle";
 
 export default function Dashboard() {
+  usePageTitle("Dashboard");
   const [currentUser, setCurrentUser] = useState(() => {
     const data = JSON.parse(localStorage.getItem("Find Jobs Data"));
     return data?.others.find(o => o.type === "currentUser")?.data || null;

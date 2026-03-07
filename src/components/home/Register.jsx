@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import usePageTitle from "./usePageTitle";
 
 function Register() {
+  usePageTitle("Sign Up");
   const navigate = useNavigate();
 
   const [form, setForm] = useState({

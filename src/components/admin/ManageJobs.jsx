@@ -1,7 +1,9 @@
 import { useState, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
+import usePageTitle from "../home/usePageTitle";
 
 export default function ManageJobs() {
+  usePageTitle("Admin Manage Jobs");
   const navigate = useNavigate();
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState("All");

@@ -1,6 +1,7 @@
 import { useState, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import ReactDOM from "react-dom";
+import usePageTitle from "../home/usePageTitle";
 
 function DeleteModal({ job, onClose, onConfirm }) {
   return ReactDOM.createPortal(
@@ -40,6 +41,7 @@ function formatDate(dateString) {
 }
 
 export default function ManageJobPosts() {
+  usePageTitle("Company Manage Job Posts");
   const navigate = useNavigate();
 
   // ✅ Always read data first

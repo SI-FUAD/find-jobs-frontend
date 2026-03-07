@@ -1,7 +1,9 @@
+import usePageTitle from "../home/usePageTitle";
 import html2pdf from "html2pdf.js";
 import CVTemplate from "./CVTemplate";
 
 function MyCV() {
+  usePageTitle("My CV");
   const data = JSON.parse(localStorage.getItem("Find Jobs Data"));
   const user = data?.others.find(o => o.type === "currentUser")?.data;
 

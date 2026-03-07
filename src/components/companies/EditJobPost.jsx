@@ -1,5 +1,6 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import usePageTitle from "../home/usePageTitle";
 
 export default function EditJobPost() {
   const { id } = useParams();
@@ -7,9 +8,11 @@ export default function EditJobPost() {
 
   const storedData = JSON.parse(localStorage.getItem("Find Jobs Data"));
   const job = storedData?.jobs?.find(j => j.id === id);
-
+  
+  usePageTitle(job ? `Company Edit Job ${job.title}` : "Company Job Not Found");
+  
   const [form, setForm] = useState(job ? { ...job } : null);
-
+  
   if (!job) {
     return <p className="p-6 text-red-500">Job not found</p>;
   }

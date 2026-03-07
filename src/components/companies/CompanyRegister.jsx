@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import usePageTitle from "../home/usePageTitle";
 import { generateCompanyId, generateColorFromText } from "./utils";
 
 function CompanyRegister() {
+  usePageTitle("Company Sign Up");
   const navigate = useNavigate();
   const [form, setForm] = useState({
     name: "",

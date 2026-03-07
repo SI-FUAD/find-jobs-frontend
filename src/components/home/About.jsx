@@ -1,4 +1,8 @@
+import usePageTitle from "./usePageTitle";
+
 export default function About() {
+  usePageTitle("About Us");
+  
   return (
     <div className="min-h-screen bg-gray-50 pt-24 md:pt-32 px-4 md:px-12 pb-16">
       <div className="max-w-5xl mx-auto bg-white shadow-lg rounded-xl p-6 md:p-12 space-y-14">

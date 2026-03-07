@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import usePageTitle from "../home/usePageTitle";
 
 export default function AddJobPost() {
+  usePageTitle("Company Post a Job");
   const navigate = useNavigate();
   const data = JSON.parse(localStorage.getItem("Find Jobs Data"));
   const currentUser = data?.others?.find(o => o.type === "currentUser")?.data;

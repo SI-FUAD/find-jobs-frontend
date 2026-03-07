@@ -1,3 +1,4 @@
+import usePageTitle from "../home/usePageTitle";
 import { useEffect, useState } from "react";
 import {
   FaUsers,
@@ -7,6 +8,7 @@ import {
 } from "react-icons/fa";
 
 export default function AppliedJobsStatus() {
+  usePageTitle("Application Status");
   const [data, setData] = useState(
     JSON.parse(localStorage.getItem("Find Jobs Data")) || {}
   );

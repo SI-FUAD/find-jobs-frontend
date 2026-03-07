@@ -1,9 +1,14 @@
 import React, { useEffect, useState, useMemo } from "react";
+import usePageTitle from "../home/usePageTitle";
 import JobCard from "../jobs/JobCard";
 
 export default function Companies() {
   const [search, setSearch] = useState("");
-
+  usePageTitle(
+  search
+    ? `Companies Hiring: ${search}`
+    : "Companies Hiring Now"
+);
   const [data, setData] = useState(() => {
     return (
       JSON.parse(localStorage.getItem("Find Jobs Data")) || {

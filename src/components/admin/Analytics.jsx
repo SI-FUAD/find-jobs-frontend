@@ -1,4 +1,5 @@
 import { useState, useMemo } from "react";
+import usePageTitle from "../home/usePageTitle";
 import { generateFakeData } from "./fakeDataGenerator";
 import {
   PieChart,
@@ -10,6 +11,7 @@ import {
 } from "recharts";
 
 function Analytics() {
+  usePageTitle("Admin Dashboard");
   const [showModal, setShowModal] = useState(false);
   const [actionModal, setActionModal] = useState({ show: false, message: "" });
   const [showImportModal, setShowImportModal] = useState(false);

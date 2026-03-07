@@ -1,5 +1,6 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import usePageTitle from "../home/usePageTitle";
 import { Bookmark } from "lucide-react";
 
 export default function JobView() {
@@ -12,6 +13,7 @@ export default function JobView() {
   const [modal, setModal] = useState(null); // null | "confirm" | "success"
 
   const job = data?.jobs?.find(j => j.id === id);
+  usePageTitle(job ? `${job.title} at ${job.companyName || ""}` : "Job Not Found");
   const isExpired =
   job &&
   new Date(job.deadline) <

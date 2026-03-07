@@ -1,7 +1,10 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import usePageTitle from "./usePageTitle";
 
 export default function Home() {
+  usePageTitle("Home - Discover Your Dream Career");
+
   const [jobTitle, setJobTitle] = useState("");
   const [location, setLocation] = useState("");
   const navigate = useNavigate();

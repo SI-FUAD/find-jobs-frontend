@@ -1,5 +1,6 @@
 import { useState, useEffect, useMemo } from "react";
 import { useSearchParams } from "react-router-dom";
+import usePageTitle from "../home/usePageTitle";
 import JobCard from "./JobCard";
 import { getSimilarTitles } from "../home/jobTitleUtils";
 
@@ -9,6 +10,18 @@ export default function Jobs() {
   // Filters
   const [search, setSearch] = useState(searchParams.get("title") || "");
   const [locationFilter, setLocationFilter] = useState(searchParams.get("location") || "");
+  const formattedSearch = search?.trim();
+const formattedLocation = locationFilter?.trim();
+
+usePageTitle(
+  formattedSearch && formattedLocation
+    ? `${formattedSearch} jobs in ${formattedLocation}`
+    : formattedSearch
+    ? `${formattedSearch} jobs`
+    : formattedLocation
+    ? `jobs in ${formattedLocation}`
+    : "Browse Jobs"
+);
   const [levelFilter, setLevelFilter] = useState("");
   const [experienceFilter, setExperienceFilter] = useState("");
 

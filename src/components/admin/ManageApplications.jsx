@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import usePageTitle from "../home/usePageTitle";
 
 export default function ManageApplications() {
+  usePageTitle("Admin Manage Applications");
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
 

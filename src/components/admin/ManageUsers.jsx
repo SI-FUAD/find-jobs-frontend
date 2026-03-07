@@ -1,7 +1,9 @@
 import { useState, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
+import usePageTitle from "../home/usePageTitle";
 
 export default function ManageUsers() {
+  usePageTitle("Admin Manage Users");
   const navigate = useNavigate();
   const users = useMemo(() => {
     const stored = JSON.parse(localStorage.getItem("Find Jobs Data")) || { users: [] };

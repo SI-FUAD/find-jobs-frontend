@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
+import usePageTitle from "../home/usePageTitle";
 import JobCard from "../jobs/JobCard";
 
 export default function SavedJobs() {
+  usePageTitle("Saved Jobs");
   const [data, setData] = useState(() => {
   return (
     JSON.parse(localStorage.getItem("Find Jobs Data")) || {

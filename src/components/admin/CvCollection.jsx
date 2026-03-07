@@ -1,8 +1,10 @@
 import { useState, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
+import usePageTitle from "../home/usePageTitle";
 import { getSimilarTitles } from "../home/jobTitleUtils";
 
 export default function CvCollection() {
+  usePageTitle("Admin CV Collections");
   const navigate = useNavigate();
   const [search, setSearch] = useState("");
 

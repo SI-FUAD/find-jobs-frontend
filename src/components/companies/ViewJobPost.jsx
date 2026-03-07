@@ -1,4 +1,5 @@
 import { useParams, useNavigate } from "react-router-dom";
+import usePageTitle from "../home/usePageTitle";
 
 function formatDate(dateString) {
   if (!dateString) return "-";
@@ -15,7 +16,9 @@ export default function ViewJobPost() {
 
   const data = JSON.parse(localStorage.getItem("Find Jobs Data"));
   const job = data.jobs.find(j => j.id === id);
-
+  
+  usePageTitle(job ? `Company View Job ${job.title}` : "Company Job Not Found");
+  
   if (!job) return <p className="p-6 text-red-500">Job not found</p>;
 
   /* ================= STATUS CHECK (Same as Admin) ================= */

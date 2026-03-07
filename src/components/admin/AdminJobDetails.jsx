@@ -1,5 +1,6 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useMemo, useState, useRef } from "react";
+import usePageTitle from "../home/usePageTitle";
 import { getSimilarTitles } from "../home/jobTitleUtils";
 
 function formatDate(dateString) {
@@ -33,6 +34,8 @@ export default function AdminJobDetails() {
   }, []);
 
   const job = data.jobs.find((j) => j.id === jobId);
+
+  usePageTitle(job ? `Admin Job Details ${job.title}` : "Admin Job Not Found");
 
   /* ================= SUGGESTED CANDIDATES ================= */
   const suggestedCandidates = useMemo(() => {
