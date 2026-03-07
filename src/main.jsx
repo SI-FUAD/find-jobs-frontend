@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client'
 import { BrowserRouter } from "react-router-dom";
 import './index.css'
 import App from './App.jsx'
+import { Analytics } from "@vercel/analytics/react";
 
 if (!localStorage.getItem("Find Jobs Data")) {
   localStorage.setItem(
@@ -32,5 +33,6 @@ createRoot(document.getElementById('root')).render(
     <BrowserRouter>
     <App />
     </BrowserRouter>
+    <Analytics />
   </StrictMode>,
 )
