@@ -4,6 +4,7 @@ import { BrowserRouter } from "react-router-dom";
 import './index.css'
 import App from './App.jsx'
 import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/react";
 
 if (!localStorage.getItem("Find Jobs Data")) {
   localStorage.setItem(
@@ -34,5 +35,6 @@ createRoot(document.getElementById('root')).render(
     <App />
     </BrowserRouter>
     <Analytics />
+    <SpeedInsights />
   </StrictMode>,
 )
