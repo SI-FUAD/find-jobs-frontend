@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import usePageTitle from "./usePageTitle";
+import { generateFakeData } from "../admin/fakeDataGenerator";
 
 export default function Home() {
   usePageTitle("Home - Discover Your Dream Career");
@@ -17,6 +18,42 @@ export default function Home() {
 
     navigate(`/jobs?${params.toString()}`);
   };
+
+  const [actionMessage, setActionMessage] = useState("");
+
+const handleImportFakeData = () => {
+  const existingData = JSON.parse(localStorage.getItem("Find Jobs Data")) || {};
+
+  const fakeData = generateFakeData();
+
+  const newData = {
+    ...existingData,
+    users: fakeData.users,
+    companies: fakeData.companies,
+    jobs: fakeData.jobs,
+    applications: fakeData.applications,
+  };
+
+  localStorage.setItem("Find Jobs Data", JSON.stringify(newData));
+
+  setActionMessage("Fake demo data imported successfully! You can now explore the full website.");
+};
+
+const handleClearFakeData = () => {
+  const existingData = JSON.parse(localStorage.getItem("Find Jobs Data")) || {};
+
+  const newData = {
+    ...existingData,
+    users: [],
+    companies: [],
+    jobs: [],
+    applications: [],
+  };
+
+  localStorage.setItem("Find Jobs Data", JSON.stringify(newData));
+
+  setActionMessage("All demo data cleared successfully.");
+};
 
   return (
     <section
@@ -59,6 +96,40 @@ export default function Home() {
                 Search
               </button>
             </div>
+
+            {/* Demo Data Section */}
+<div className="mt-8 bg-white/10 backdrop-blur-sm p-4 rounded-2xl text-center">
+
+  <p className="text-gray-300 mb-4 text-sm md:text-base">
+    Want to explore the full platform with sample users, companies, jobs and applications?
+    Import demo data instantly and test all features.
+  </p>
+
+  <div className="flex flex-col sm:flex-row justify-center gap-3">
+
+    <button
+      onClick={handleImportFakeData}
+      className="px-6 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white transition"
+    >
+      Import Demo Data
+    </button>
+
+    <button
+      onClick={handleClearFakeData}
+      className="px-6 py-2 rounded-lg bg-red-600 hover:bg-red-700 text-white transition"
+    >
+      Clear Demo Data
+    </button>
+
+  </div>
+
+  {actionMessage && (
+    <p className="text-green-400 mt-3 text-sm">
+      {actionMessage}
+    </p>
+  )}
+
+</div>
 
           </div>
         </div>
